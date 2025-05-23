@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #d3cce3, #e9e4f0);
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    .profile-card {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(255,255,255,0.2);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    img {
+      max-width: 150px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <h2>User Profile</h2>
+    <img id="userPhoto" alt="User Photo">
+    <img id="userSignature" alt="Signature">
+
+    <p><strong>Mobile:</strong> <span id="mobile"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Address:</strong> <span id="address"></span></p>
+    <p><strong>Secret Code:</strong> <span id="code"></span></p>
+  </div>
+
+  <script>
+    document.getElementById('mobile').textContent = localStorage.getItem('mobile') || 'N/A';
+    document.getElementById('email').textContent = localStorage.getItem('email') || 'N/A';
+    document.getElementById('address').textContent = localStorage.getItem('address') || 'N/A';
+    document.getElementById('code').textContent = localStorage.getItem('code') || 'N/A';
+    document.getElementById('userPhoto').src = localStorage.getItem('photo');
+    document.getElementById('userSignature').src = localStorage.getItem('signature');
+  </script>
+</body>
+</html>
