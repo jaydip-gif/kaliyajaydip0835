@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Form</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: auto;
+      background: rgba(255,255,255,0.2);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .form-container h2 {
+      text-align: center;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>User Detail</h2>
+    <form id="userForm">
+      <label>Upload Photo:</label>
+      <input type="file" id="photo" accept="image/*" required>
+
+      <label>Upload Signature:</label>
+      <input type="file" id="signature" accept="image/*" required>
+
+      <input type="tel" id="mobile" placeholder="Mobile Number" required>
+      <input type="email" id="email" placeholder="Gmail ID" required>
+      <textarea id="address" placeholder="Address" rows="4" required></textarea>
+      <input type="text" id="code" placeholder="Secret Code" required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const reader = (fileInput, key) => {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            localStorage.setItem(key, e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+
+      localStorage.setItem('mobile', document.getElementById('mobile').value);
+      localStorage.setItem('email', document.getElementById('email').value);
+      localStorage.setItem('address', document.getElementById('address').value);
+      localStorage.setItem('code', document.getElementById('code').value);
+
+      reader(document.getElementById('photo'), 'photo');
+      reader(document.getElementById('signature'), 'signature');
+
+      // Delay to allow images to load in localStorage
+      setTimeout(() => {
+        window.location.href = 'profile.html';
+      }, 500);
+    });
+  </script>
+</body>
+</html>
